@@ -1,8 +1,8 @@
 import argparse
-from PIL import Image
 import os
+from PIL import Image
 
-def parse_arguments():
+def parse_args():
     parser = argparse.ArgumentParser(description="Crop images in a folder based on given coordinates.")
     parser.add_argument(
         "--coords", 
@@ -36,7 +36,7 @@ def crop_images(input_folder, output_folder, crop_coordinates):
 print("Cropping complete")
 
 def main():
-    args = parse_arguments()
+    args = parse_args()
     crop_images(args.input_folder, args.output_folder, tuple(args.coords))
 
 if __name__ == "__main__":
