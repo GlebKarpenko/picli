@@ -1,16 +1,43 @@
+import argparse
 from PIL import Image
 import os
 
-#crop region: left, top, right, bottom
-CROPPED_COORDINATES = (0, 0, 550, 825)
+def parse_arguments():
+    parser = argparse.ArgumentParser(description="Crop images in a folder based on given coordinates.")
+    parser.add_argument(
+        "--coords", 
+        type=int, 
+        nargs=4, 
+        metavar=("left", "top", "right", "bottom"),
+        required=True, 
+        help="Coordinates for cropping (left, top, right, bottom)."
+    )
+    parser.add_argument(
+        "--input_folder",
+        type=str,
+        default="../to_crop",
+        help="Input folder containing images to crop. Default is 'to_crop_right'."
+    )
+    parser.add_argument(
+        "--output_folder",
+        type=str,
+        default="../cropped",
+        help="Output folder for cropped images. Default is 'cropped'."
+    )
+    return parser.parse_args()
 
-INPUT_FOLDER = "../to_crop_right"
-OUTPUT_FOLDER = "../cropped"
-
-for filename in os.listdir(INPUT_FOLDER):
-    if filename.endswith(".jpg"):
-        img = Image.open(os.path.join(INPUT_FOLDER, filename))
-        img = img.crop(CROPPED_COORDINATES)
-        img.save(os.path.join(OUTPUT_FOLDER, filename))
+def crop_images(input_folder, output_folder, crop_coordinates):
+    for filename in os.listdir(input_folder):
+        if filename.endswith(".jpg"):
+            img = Image.open(os.path.join(input_folder, filename))
+            img = img.crop(crop_coordinates)
+            img.save(os.path.join(output_folder, filename))
 
 print("Cropping complete")
+
+def main():
+    args = parse_arguments()
+    crop_images(args.input_folder, args.output_folder, tuple(args.coords))
+
+if __name__ == "__main__":
+    main()
