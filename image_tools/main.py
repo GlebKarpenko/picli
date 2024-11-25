@@ -67,12 +67,22 @@ def main():
         help="Desired quality for result image. Bigger value means higher quality. Defaul is 80."
     )
 
+    # Help command
+    help_parser = subparsers.add_parser(
+        "help",
+        help="Show available commands and their descriptions."
+    )
+
     args = parser.parse_args()
 
-    if args.command == "crop":
-        crop_module.main(args)
-    if args.command == "compress":
-        compress_module.main(args)
+    commands = {
+        "help": parser.print_help(),
+        "crop": lambda: crop_module.main(args),
+        "compress": lambda: compress_module.main(args)
+    }
+
+    unknown_command = parser.print_help()
+    commands.get(args.command, unknown_command)()
 
 if __name__ == "__main__":
     main()
