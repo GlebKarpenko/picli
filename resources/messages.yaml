@@ -1,0 +1,14 @@
+general:
+  errors:
+    no_module_execution: "This script is meant to be imported."
+    invalid_folder_path: "The folder path {folder_path} is invalid or does not exist."
+
+editing_tools:
+  compressing_complete: "Compressing complete."
+  cropping_complete: "Cropping complete"
+  config_filepath_complete: "Successfully set {folder_type} to path: {user_input_path}"
+  config_descr: "\nStore images you want to edit in input_folder. Edited result will be stored in output_folder"
+  input_folder_info: "Current input_folder path with images to edit (use --input_folder to edit): {input_folder}"
+  output_folder_info: "Current output_folder path with edited images(use --output_folder to edit): {output_folder}"
+  errors: 
+    no_config_access: "ERROR: Could not access configuration file."
