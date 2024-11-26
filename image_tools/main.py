@@ -1,5 +1,7 @@
 import argparse
-from image_tools import crop_module, compress_module
+from image_tools import crop_module
+from image_tools import compress_module
+from image_tools import config_module
 
 def main():
     parser = argparse.ArgumentParser(
@@ -67,6 +69,30 @@ def main():
         help="Desired quality for result image. Bigger value means higher quality. Defaul is 80."
     )
 
+    # Config command
+    config_parser = subparsers.add_parser(
+        "config",
+        help="Config editor input and output folder."
+    )
+    config_parser.add_argument(
+        "--input_folder",
+        type=str,
+        required=False,
+        default=None,
+        help="Set input folder with files that you want to edit." +
+            "\nNote: the original files will not be changed." + 
+            "\nEdited result images will be put in output folder (default: ./output_folder)." + 
+            "\nUse config --output_folder to set output folder."
+    )
+    config_parser.add_argument(
+        "--output_folder",
+        type=str,
+        required=False,
+        default=None,
+        help="Set folder where edited files will be saved." +
+            "\nNote: On each edit same files will be overwritten."
+    )
+
     # Help command
     help_parser = subparsers.add_parser(
         "help",
@@ -76,12 +102,13 @@ def main():
     args = parser.parse_args()
 
     commands = {
-        "help": parser.print_help(),
+        "help": lambda: parser.print_help(),
         "crop": lambda: crop_module.main(args),
-        "compress": lambda: compress_module.main(args)
+        "compress": lambda: compress_module.main(args),
+        "config": lambda: config_module.main(args)
     }
 
-    unknown_command = parser.print_help()
+    unknown_command = commands["help"]
     commands.get(args.command, unknown_command)()
 
 if __name__ == "__main__":
