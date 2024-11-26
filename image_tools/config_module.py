@@ -52,6 +52,9 @@ def set_default_folder(folder_type, folder_path):
     config["FOLDERS"][folder_type] = folder_path
     save_config(config)
 
+def get_folder_path(user_input, folder_type):
+    return user_input if user_input else get_default_folder(folder_type)
+
 def main(args):
     """Entry point for the config subcommand."""
     try:

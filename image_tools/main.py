@@ -29,13 +29,11 @@ def main():
     crop_parser.add_argument(
         "--input_folder",
         type=str,
-        default="../to_crop",
         help="Input folder containing images to crop. Default is '../to_crop'."
     )
     crop_parser.add_argument(
         "--output_folder",
         type=str,
-        default="../cropped",
         help="Output folder for cropped images. Default is '../cropped'."
     )
 
@@ -47,13 +45,11 @@ def main():
     compress_parser.add_argument(
         "--input_folder",
         type=str,
-        default="../to_compress",
         help="Input folder containing images to compress. Default is '../to_compress'."
     )
     compress_parser.add_argument(
         "--output_folder",
         type=str,
-        default="../compressed",
         help="Output folder for cropped images. Default is 'compressed'."
     )
     compress_parser.add_argument(
@@ -78,7 +74,6 @@ def main():
         "--input_folder",
         type=str,
         required=False,
-        default=None,
         help="Set input folder with files that you want to edit." +
             "\nNote: the original files will not be changed." + 
             "\nEdited result images will be put in output folder (default: ./output_folder)." + 
@@ -88,7 +83,6 @@ def main():
         "--output_folder",
         type=str,
         required=False,
-        default=None,
         help="Set folder where edited files will be saved." +
             "\nNote: On each edit same files will be overwritten."
     )
