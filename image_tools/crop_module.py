@@ -1,6 +1,7 @@
 import os
 from PIL import Image
 from image_tools import config_module
+from image_tools import message_manager as mn
 
 """Crop images in the input folder and save them to the output folder."""
 def crop_images(input_folder, output_folder, crop_coordinates):
@@ -16,7 +17,7 @@ def crop_images(input_folder, output_folder, crop_coordinates):
             output_path = os.path.join(output_folder, filename)
             img.save(output_path)
 
-    print("Cropping complete")
+    print(mn.get_tools_message(key="cropping_complete"))
 
 def main(args):
     """Entry point for the crop subcommand."""
@@ -25,4 +26,4 @@ def main(args):
     crop_images(input_folder, output_folder, tuple(args.coords))
 
 if __name__ == "__main__":
-    print("This script is meant to be imported.")
+    print(mn.get_general_error(key="no_module_execution"))

@@ -1,11 +1,12 @@
 import os
 from PIL import Image
 from image_tools import config_module
+from image_tools import message_manager as mn
 
 """Compress images in the input folder and save them to the output folder."""
 def compress_images(input_folder, output_folder, desired_width, desired_quality):
     os.makedirs(output_folder, exist_ok=True)
-    
+
     for filename in os.listdir(input_folder):
         if filename.lower().endswith((".jpg", ".jpeg", ".png")):
             img_path = os.path.join(input_folder, filename)
@@ -19,7 +20,7 @@ def compress_images(input_folder, output_folder, desired_width, desired_quality)
             output_path = os.path.join(output_folder, filename)
             resized_image.save(output_path, format="JPEG", quality = desired_quality)
 
-    print("Compressing complete")
+    print(mn.get_tools_message(key="compressing_complete"))
 
 def main(args):
     """Entry point for the compress subcommand."""
@@ -28,4 +29,4 @@ def main(args):
     compress_images(input_folder, output_folder, args.width, args.quality)
 
 if __name__ == "__main__":
-    print("This script is meant to be imported.")
+    print(mn.get_general_error(key="no_module_execution"))

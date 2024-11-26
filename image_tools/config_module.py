@@ -1,5 +1,6 @@
 import os
 import configparser
+from image_tools import message_manager as mn
 
 """
 Determine the appropriate USER path for the config file based on the OS.
@@ -60,26 +61,37 @@ def main(args):
     try:
         load_config()
     except:
-        print("ERROR: Could not access configuration file.")
+        print(mn.get_tools_message(key="no_config_access"))
         return
 
     if args.input_folder:
         user_input_path = args.input_folder
         set_default_folder("input_folder", user_input_path)
-        print(f"Successfully set input_folder to path: {user_input_path}")
+
+        message = mn.get_tools_message(
+            key="config_filepath_complete", 
+            folder_type="input_folder", 
+            user_path=user_input_path
+        )
+        print(message)
 
     if args.output_folder:
         user_output_path = args.output_folder
         set_default_folder("output_folder", user_output_path)
-        print(f"Successfully set output_folder to path: {user_output_path}")       
+
+        message = mn.get_tools_message(
+            key="config_filepath_complete", 
+            folder_type="output_folder", 
+            user_path=user_output_path
+        )
+        print(message)       
 
     input_folder = get_default_folder("input_folder")
     output_folder = get_default_folder("output_folder")
 
-    print()
-    print("Store images you want to edit in input_folder. Edited result will be stored in output_folder")
-    print("Current input_folder path with images to edit (use --input_folder to edit): ", input_folder)
-    print("Current output_folder path with edited images(use --output_folder to edit): ", output_folder)
+    print(mn.get_tools_message(key="config_descr"))
+    print(mn.get_tools_message(key="input_folder_info", input_folder=input_folder))
+    print(mn.get_tools_message(key="output_folder_info", output_folder=output_folder))
 
 if __name__ == "__main__":
-    print("This script is meant to be imported.")
+    print(mn.get_general_error(key="no_module_execution"))
