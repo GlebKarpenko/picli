@@ -1,22 +1,24 @@
 import argparse
+
+from image_tools import message_manager as mn
 from image_tools import crop_module
 from image_tools import compress_module
 from image_tools import config_module
 
 def main():
     parser = argparse.ArgumentParser(
-        description="A CLI toolset for image editing."
+        description=mn.get_command_prop(command_name="picli", prop="descr")
     )
     subparsers = parser.add_subparsers(
         dest="command",
         required=True,
-        help="Subcommand to run (e.g., crop, resize, filter)."
+        help=mn.get_command_prop(command_name="picli", prop="help")
     )
 
     # Crop command
     crop_parser = subparsers.add_parser(
         "crop",
-        help="Crop images in a folder based on given coordinates."
+        help=mn.get_command_prop(command_name="crop", prop="help")
     )
     crop_parser.add_argument(
         "--coords", 
@@ -24,73 +26,75 @@ def main():
         nargs=4, 
         metavar=("left", "top", "right", "bottom"),
         required=True, 
-        help="Coordinates for cropping (left, top, right, bottom)."
+        help=mn.get_command_arg_prop(command_name="crop", arg_name="coords", prop="help")
     )
     crop_parser.add_argument(
+        "-i",
         "--input_folder",
         type=str,
-        help="Input folder containing images to crop. Default is '../to_crop'."
+        help=mn.get_command_arg_prop(command_name="crop", arg_name="input_folder", prop="help")
     )
     crop_parser.add_argument(
+        "-o",
         "--output_folder",
         type=str,
-        help="Output folder for cropped images. Default is '../cropped'."
+        help=mn.get_command_arg_prop(command_name="crop", arg_name="output_folder", prop="help")
     )
 
     # Compress command
     compress_parser = subparsers.add_parser(
         "compress",
-        help = "Compress images in a folder based on desired width and quality."
+        help = mn.get_command_prop(command_name="compress", prop="help")
     )
     compress_parser.add_argument(
+        "-i",
         "--input_folder",
         type=str,
-        help="Input folder containing images to compress. Default is '../to_compress'."
+        help=mn.get_command_arg_prop(command_name="compress", arg_name="input_folder", prop="help")
     )
     compress_parser.add_argument(
+        "-o",
         "--output_folder",
         type=str,
-        help="Output folder for cropped images. Default is 'compressed'."
+        help=mn.get_command_arg_prop(command_name="compress", arg_name="output_folder", prop="help")
     )
     compress_parser.add_argument(
         "--width",
         type=int,
         default=720,
-        help="Width for result image. Height is determined respectivly to aspect ratio."
+        help=mn.get_command_arg_prop(command_name="compress", arg_name="width", prop="help")
     )
     compress_parser.add_argument(
         "--quality",
         type=int,
         default=80,
-        help="Desired quality for result image. Bigger value means higher quality. Defaul is 80."
+        help=mn.get_command_arg_prop(command_name="compress", arg_name="quality", prop="help")
     )
 
     # Config command
     config_parser = subparsers.add_parser(
         "config",
-        help="Config editor input and output folder."
+        help=mn.get_command_prop(command_name="config", prop="help")
     )
     config_parser.add_argument(
+        "-i"
         "--input_folder",
         type=str,
         required=False,
-        help="Set input folder with files that you want to edit." +
-            "\nNote: the original files will not be changed." + 
-            "\nEdited result images will be put in output folder (default: ./output_folder)." + 
-            "\nUse config --output_folder to set output folder."
+        help=mn.get_command_arg_prop(command_name="config", arg_name="input_folder", prop="help")
     )
     config_parser.add_argument(
+        "-o"
         "--output_folder",
         type=str,
         required=False,
-        help="Set folder where edited files will be saved." +
-            "\nNote: On each edit same files will be overwritten."
+        help=mn.get_command_arg_prop(command_name="config", arg_name="output_folder", prop="help")
     )
 
     # Help command
     help_parser = subparsers.add_parser(
         "help",
-        help="Show available commands and their descriptions."
+        help=mn.get_command_prop(command_name="help", prop="help")
     )
 
     args = parser.parse_args()
