@@ -5,22 +5,13 @@ from image_tools import crop_module
 from image_tools import compress_module
 from image_tools import config_module
 
-def main():
-    parser = argparse.ArgumentParser(
-        description=mn.get_command_prop(command_name="picli", prop="descr")
-    )
-    subparsers = parser.add_subparsers(
-        dest="command",
-        required=True,
-        help=mn.get_command_prop(command_name="picli", prop="help")
-    )
-
-    # Crop command
+def add_crop_command_parser(subparsers):
     crop_parser = subparsers.add_parser(
         "crop",
         help=mn.get_command_prop(command_name="crop", prop="help")
     )
     crop_parser.add_argument(
+        "-c",
         "--coords", 
         type=int, 
         nargs=4, 
@@ -41,7 +32,7 @@ def main():
         help=mn.get_command_arg_prop(command_name="crop", arg_name="output_folder", prop="help")
     )
 
-    # Compress command
+def add_compress_command_parser(subparsers):
     compress_parser = subparsers.add_parser(
         "compress",
         help = mn.get_command_prop(command_name="compress", prop="help")
@@ -59,19 +50,21 @@ def main():
         help=mn.get_command_arg_prop(command_name="compress", arg_name="output_folder", prop="help")
     )
     compress_parser.add_argument(
+        "-w",
         "--width",
         type=int,
         default=720,
         help=mn.get_command_arg_prop(command_name="compress", arg_name="width", prop="help")
     )
     compress_parser.add_argument(
+        "-q",
         "--quality",
         type=int,
         default=80,
         help=mn.get_command_arg_prop(command_name="compress", arg_name="quality", prop="help")
     )
 
-    # Config command
+def add_config_command_parser(subparsers):
     config_parser = subparsers.add_parser(
         "config",
         help=mn.get_command_prop(command_name="config", prop="help")
@@ -91,11 +84,31 @@ def main():
         help=mn.get_command_arg_prop(command_name="config", arg_name="output_folder", prop="help")
     )
 
-    # Help command
+def add_help_command_parser(subparsers):
     help_parser = subparsers.add_parser(
         "help",
         help=mn.get_command_prop(command_name="help", prop="help")
     )
+
+def setup_subparsers(parser):
+    subparsers = parser.add_subparsers(
+        dest="command",
+        required=True,
+        help=mn.get_command_prop(command_name="picli", prop="help")
+    )
+
+    return subparsers
+
+def main():
+    parser = argparse.ArgumentParser(
+        description=mn.get_command_prop(command_name="picli", prop="descr")
+    )
+    subparsers = setup_subparsers(parser)
+    
+    add_compress_command_parser(subparsers)
+    add_crop_command_parser(subparsers)
+    add_config_command_parser(subparsers)
+    add_help_command_parser(subparsers)
 
     args = parser.parse_args()
 
