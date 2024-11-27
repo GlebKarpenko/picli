@@ -47,3 +47,6 @@ config:
       help: |
             Set folder where edited files will be saved.
             Note: On each edit same files will be overwritten.
+help: 
+  name: "--help"
+  help: "Show available commands and their descriptions."
