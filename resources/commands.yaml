@@ -1,0 +1,49 @@
+picli:
+  name: "picli"
+  descr: "A CLI toolset for image editing."
+  help: "Subcommand to run (e.g., crop, resize, filter, compress, config)."
+crop:
+  name: "crop"
+  help: "Crop images in a folder based on given coordinates."
+  args: 
+    coords:
+      name: "--coords"
+      help: "Coordinates for cropping (left, top, right, bottom)."
+    input_folder:
+      name: "--input_folder"
+      help: "Input folder containing images to crop. Default is '../to_crop'."
+    output_folder:
+      name: "--output_folder"
+      help: "Output folder for cropped images. Default is '../cropped'."
+compress:
+  name: "compress"
+  help: "Compress images in a folder based on desired width and quality."
+  args:
+    input_folder:
+      name: "--input_folder"
+      help: "Input folder containing images to crop. Default is '../to_crop'."
+    output_folder:
+      name: "--output_folder"
+      help: "Output folder for cropped images. Default is '../cropped'."
+    width: 
+      name: "--width"
+      help: "Width for result image. Height is determined respectivly to aspect ratio."
+    quality:
+      name: "--quality"
+      help: "Desired quality for result image. Bigger value means higher quality. Defaul is 80."
+config:
+  name: "config"
+  help: "Config editor input and output folder."
+  args:
+    input_folder:
+      name: "--input_folder"
+      help: |
+            Set input folder with files that you want to edit.
+            Note: the original files will not be changed.
+            Edited result images will be put in output folder (default: ./output_folder).
+            Use config --output_folder to set output folder.
+    output_folder:
+      name: "--output_folder"
+      help: |
+            Set folder where edited files will be saved.
+            Note: On each edit same files will be overwritten.
