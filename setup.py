@@ -18,6 +18,7 @@ setup(
     },
     install_requires=[
         "Pillow",
+        "pytest"
     ],
     python_requires=">=3.7",
     classifiers=[
