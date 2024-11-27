@@ -11,7 +11,7 @@ crop:
       help: "Coordinates for cropping (left, top, right, bottom)."
     input_folder:
       name: "--input_folder"
-      help: "Input folder containing images to crop. Default is '../to_crop'."
+      help: "Input folder containing images to crop."
     output_folder:
       name: "--output_folder"
       help: "Output folder for cropped images. Default is '../cropped'."
@@ -21,7 +21,7 @@ compress:
   args:
     input_folder:
       name: "--input_folder"
-      help: "Input folder containing images to crop. Default is '../to_crop'."
+      help: "Input folder containing images to crop."
     output_folder:
       name: "--output_folder"
       help: "Output folder for cropped images. Default is '../cropped'."
@@ -30,7 +30,7 @@ compress:
       help: "Width for result image. Height is determined respectivly to aspect ratio."
     quality:
       name: "--quality"
-      help: "Desired quality for result image. Bigger value means higher quality. Defaul is 80."
+      help: "Desired quality for result image. Bigger value means higher quality. Default is 80."
 config:
   name: "config"
   help: "Config editor input and output folder."
