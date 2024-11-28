@@ -13,8 +13,9 @@ editing_tools:
   input_folder_info: "Current input_folder path with images to edit (use --input_folder to edit): {input_folder}"
   output_folder_info: "Current output_folder path with edited images(use --output_folder to edit): {output_folder}"
   errors: 
-    cropping_wrong_percent: "Invalid percentage value: {coordinate}"
-    cropping_wrong_pixel: "Invalid pixel value: {coordinate}"
+    wrong_crop_coords_input: "Invalid cropping coordinates input. An example of valid coords is: \"crop -c 5%\" or \"crop -c 5%,10,5px,0%\""
+    cropping_wrong_percent: "Invalid cropping area percentage value: {coordinate}"
+    cropping_wrong_pixel: "Invalid cropping area pixel value: {coordinate}"
     cropping_failed: "Could not crop files in {input_folder} with specified parameters"
     no_config_access: |
                       Could not access configuration file.
