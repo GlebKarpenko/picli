@@ -6,6 +6,8 @@ general:
 editing_tools:
   compressing_complete: "Compressing complete."
   cropping_complete: "Cropping complete"
+  cropping_wrong_percent: "Invalid percentage value: {coordinate}"
+  cropping_wrong_pixel: "Invalid pixel value: {coordinate}"
   config_filepath_complete: "Successfully set {folder_type} to path: {user_path}"
   config_descr: "\nStore images you want to edit in input_folder. Edited result will be stored in output_folder"
   input_folder_info: "Current input_folder path with images to edit (use --input_folder to edit): {input_folder}"

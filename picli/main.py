@@ -13,9 +13,9 @@ def add_crop_command_parser(subparsers):
     crop_parser.add_argument(
         "-c",
         "--coords", 
-        type=int, 
-        nargs=4, 
-        metavar=("left", "top", "right", "bottom"),
+        # Determine type based on user input
+        type=lambda v: [crop_module.parse_coords(coord) for coord in v.split(',')],
+        metavar="left, top, right, bottom",
         required=True, 
         help=mn.get_command_arg_prop(command_name="crop", arg_name="coords", prop="help")
     )
