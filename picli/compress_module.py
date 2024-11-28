@@ -3,8 +3,8 @@ from PIL import Image
 from picli import config_module
 from picli import message_manager as mn
 
-"""Compress images in the input folder and save them to the output folder."""
 def compress_images(input_folder, output_folder, desired_width, desired_quality):
+    """Compress images in the input folder and save them to the output folder."""
     os.makedirs(output_folder, exist_ok=True)
 
     for filename in os.listdir(input_folder):

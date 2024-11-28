@@ -2,10 +2,11 @@ import os
 import configparser
 from picli import message_manager as mn
 
-"""
-Determine the appropriate USER path for the config file based on the OS.
-"""
 def get_config_path():
+    """
+    Determine the appropriate USER path for the config file based on the OS.
+    """
+
     # Windows
     if os.name == 'nt':
         return os.path.join(os.environ['APPDATA'], "picli_config.ini")
@@ -18,18 +19,20 @@ DEFAULT_INPUT_FOLDER = "../input_folder"
 INPUT_ROOT_DIR = os.path.dirname(DEFAULT_INPUT_FOLDER)
 DEFAULT_OUTPUT_FOLDER = os.path.join(INPUT_ROOT_DIR, "output_folder")
 
-"""
-Save configuration to USER config path.
-"""
 def save_config(config):
+    """
+    Save configuration to USER config path.
+    """
+
     with open(CONFIG_PATH, "w") as configfile:
         config.write(configfile)
 
-"""
-Loads configuration from the config file.
-Returns a ConfigParser object.
-"""
 def load_config():
+    """
+    Loads configuration from the config file.
+    Returns a ConfigParser object.
+    """
+
     config = configparser.ConfigParser()
     if os.path.exists(CONFIG_PATH):
         config.read(CONFIG_PATH)
@@ -38,17 +41,19 @@ def load_config():
         save_config(config)
     return config
 
-"""
-Get the default folder for folder_type=input or output.
-"""
 def get_default_folder(folder_type):
+    """
+    Get the default folder for folder_type=input or output.
+    """
+
     config = load_config()
     return config["FOLDERS"].get(folder_type, "").strip()
 
-"""
-Set the default folder_path for folder_type of input or output folder.
-"""
 def set_default_folder(folder_type, folder_path):
+    """
+    Set the default folder_path for folder_type of input or output folder.
+    """
+
     config = load_config()
     config["FOLDERS"][folder_type] = folder_path
     save_config(config)
@@ -58,6 +63,7 @@ def get_folder_path(user_input, folder_type):
 
 def main(args):
     """Entry point for the config subcommand."""
+    
     try:
         load_config()
     except:
