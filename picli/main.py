@@ -70,14 +70,14 @@ def add_config_command_parser(subparsers):
         help=mn.get_command_prop(command_name="config", prop="help")
     )
     config_parser.add_argument(
-        "-i"
+        "-i",
         "--input_folder",
         type=str,
         required=False,
         help=mn.get_command_arg_prop(command_name="config", arg_name="input_folder", prop="help")
     )
     config_parser.add_argument(
-        "-o"
+        "-o",
         "--output_folder",
         type=str,
         required=False,
