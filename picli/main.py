@@ -1,9 +1,9 @@
 import argparse
 
-from image_tools import message_manager as mn
-from image_tools import crop_module
-from image_tools import compress_module
-from image_tools import config_module
+from picli import message_manager as mn
+from picli import crop_module
+from picli import compress_module
+from picli import config_module
 
 def add_crop_command_parser(subparsers):
     crop_parser = subparsers.add_parser(
@@ -124,4 +124,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    

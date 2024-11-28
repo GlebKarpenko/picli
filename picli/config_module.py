@@ -1,6 +1,6 @@
 import os
 import configparser
-from image_tools import message_manager as mn
+from picli import message_manager as mn
 
 """
 Determine the appropriate USER path for the config file based on the OS.

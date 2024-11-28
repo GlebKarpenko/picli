@@ -8,12 +8,12 @@ setup(
     description="A CLI toolset for automated image editing",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    url="https://github.com/GlebKarpenko/image-editor",
+    url="https://github.com/GlebKarpenko/picli",
     packages=find_packages(),
     entry_points={
         # CLI command mapped to main.py's main() function
         "console_scripts": [
-            "picli=image_tools.main:main",
+            "picli=picli.main:main",
         ],
     },
     install_requires=[
