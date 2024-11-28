@@ -17,8 +17,9 @@ setup(
         ],
     },
     install_requires=[
+        "pyyaml",
         "Pillow",
-        "pytest"
+        "pytest",
     ],
     python_requires=">=3.7",
     classifiers=[
