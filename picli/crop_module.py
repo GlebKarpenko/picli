@@ -19,6 +19,14 @@ def parse_coords(coordinate):
         except ValueError:
             raise ValueError(mn.get_tools_error("cropping_wrong_pixel", coordinate))
 
+def format_coords(input_coords):
+    if len(input_coords) == 1:
+        return input_coords * 4
+    elif len(input_coords) == 4:
+        return input_coords
+    else:
+        raise ValueError(mn.get_tools_error("wrong_crop_coords_input"))
+
 def scale_coord(pair, image_scale):
     """
     Converts percentage values to image scale
@@ -78,9 +86,12 @@ def crop_images(input_folder, output_folder, coords):
 
 def main(args):
     """Entry point for the crop subcommand."""
+
     input_folder = config_module.get_folder_path(args.input_folder, "input_folder")
     output_folder = config_module.get_folder_path(args.output_folder, "output_folder")
-    crop_images(input_folder, output_folder, tuple(args.coords))
+    
+    cropping_coords = format_coords(tuple(args.coords))
+    crop_images(input_folder, output_folder, cropping_coords)
 
 if __name__ == "__main__":
     print(mn.get_general_error(key="no_module_execution"))
