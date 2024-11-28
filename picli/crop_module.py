@@ -44,6 +44,8 @@ def crop_images(input_folder, output_folder, coords):
     """
 
     os.makedirs(output_folder, exist_ok=True)
+
+    edited_count = 0
     
     for filename in os.listdir(input_folder):
         if filename.lower().endswith((".jpg", ".jpeg", ".png")):
@@ -57,13 +59,22 @@ def crop_images(input_folder, output_folder, coords):
             right = width - scale_coord(coords[2], width)
             bottom = height -scale_coord(coords[3], height)
 
-            new_coords = (left, top, right, bottom)
-            img = img.crop(new_coords)
+            crop_box = (left, top, right, bottom)
+            img = img.crop(crop_box)
             
             output_path = os.path.join(output_folder, filename)
             img.save(output_path)
 
-    print(mn.get_tools_message(key="cropping_complete"))
+            edited_count += 1
+
+    if (edited_count > 0):
+        print(mn.get_tools_message(
+            key="cropping_complete",
+            input_folder=input_folder, 
+            output_folder=output_folder, 
+            edited_count=edited_count))
+    else:
+        print(mn.get_tools_error(key="cropping_failed"))
 
 def main(args):
     """Entry point for the crop subcommand."""

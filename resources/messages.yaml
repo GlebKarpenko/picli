@@ -5,12 +5,17 @@ general:
 
 editing_tools:
   compressing_complete: "Compressing complete."
-  cropping_complete: "Cropping complete"
-  cropping_wrong_percent: "Invalid percentage value: {coordinate}"
-  cropping_wrong_pixel: "Invalid pixel value: {coordinate}"
+  cropping_complete: |
+                     Cropped images from path {input_folder} to {output_folder}
+                     Total number of edited files: {edited_count}
   config_filepath_complete: "Successfully set {folder_type} to path: {user_path}"
   config_descr: "\nStore images you want to edit in input_folder. Edited result will be stored in output_folder"
   input_folder_info: "Current input_folder path with images to edit (use --input_folder to edit): {input_folder}"
   output_folder_info: "Current output_folder path with edited images(use --output_folder to edit): {output_folder}"
   errors: 
-    no_config_access: "ERROR: Could not access configuration file."
+    cropping_wrong_percent: "Invalid percentage value: {coordinate}"
+    cropping_wrong_pixel: "Invalid pixel value: {coordinate}"
+    cropping_failed: "Could not crop files in {input_folder} with specified parameters"
+    no_config_access: |
+                      Could not access configuration file.
+                      You may need to pass folder with images to edit as editing command argument
