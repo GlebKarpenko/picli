@@ -1,6 +1,6 @@
 import pytest
 
-import picli.message_manager as tested_module
+import picli.resource_manager as tested_module
 
 def test_get_resource_path():
     tested_module.MESSAGES_FILE_PATH = "messages.yaml"

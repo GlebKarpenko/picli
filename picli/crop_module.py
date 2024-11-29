@@ -3,7 +3,7 @@ from PIL import Image
 
 from picli.image_utils import scale_metric
 from picli import config_module
-from picli import message_manager as mn
+from picli import resource_manager as mn
 
 def format_coords(input_coords):
     if len(input_coords) == 1:

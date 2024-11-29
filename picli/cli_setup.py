@@ -1,6 +1,6 @@
 import argparse
 
-from picli import message_manager as mn
+from picli import resource_manager as mn
 from picli.image_utils import parse_metric
 
 def add_crop_command_parser(subparsers):

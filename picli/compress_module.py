@@ -1,7 +1,7 @@
 import os
 from PIL import Image
 from picli import config_module
-from picli import message_manager as mn
+from picli import resource_manager as mn
 
 def compress_images(input_folder, output_folder, desired_width, desired_quality):
     """Compress images in the input folder and save them to the output folder."""

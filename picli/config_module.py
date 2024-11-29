@@ -1,6 +1,6 @@
 import os
 import configparser
-from picli import message_manager as mn
+from picli import resource_manager as mn
 
 def get_config_path():
     """
