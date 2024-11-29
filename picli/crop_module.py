@@ -52,7 +52,8 @@ def crop_images(input_folder, output_folder, coords):
             output_folder=output_folder, 
             edited_count=edited_count))
     else:
-        print(mn.get_tools_error(key="cropping_failed"))
+        print(mn.get_tools_error(key="cropping_failed",
+                                 input_folder=input_folder))
 
 def main(args):
     """Entry point for the crop subcommand."""
