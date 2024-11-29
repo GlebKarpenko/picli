@@ -6,6 +6,7 @@ def parse_metric(metric_pair):
     Parses a coordinate value which can be an integer or a percentage string.
     Returns the value as a tuple of (type, value), where type is 'px' or '%'.
     """
+
     if metric_pair.endswith('%'):
         try: 
             return ('%', float(metric_pair[:-1]))
@@ -13,7 +14,7 @@ def parse_metric(metric_pair):
             raise ValueError(mn.get_tools_error("metric_wrong_percent", metric_pair))
     else:
         try:
-            return (('px'), int(metric_pair))
+            return (('px'), int(metric_pair[:-2]))
         except ValueError:
             raise ValueError(mn.get_tools_error("metric_wrong_pixel", metric_pair))
 
