@@ -4,7 +4,7 @@ picli:
          picli version: {version}
          A CLI tool for image processing.
 
-         This tools allows you to automate image editing tasks such as cropping or compressing images, while providing customizable configurations that are easy to script and fit to your workflow.
+         This tool allows you to automate image processing tasks such as cropping or compressing images, while providing customizable configurations that are easy to script and fit to your workflow.
 
          Basic usage:
             picli <command> [options]
@@ -20,14 +20,14 @@ picli:
                 Compress with resizing images in current directory into ./edited:
                     picli compress --width 80%, -q 55
 
-                Resize imagse by width while remaining the aspect-ratio:
+                Resize images by width while remaining the aspect-ratio:
                     picli compress -w 860px --output_folder ./resized
 
                 Config folders to edit and save results:
                     picli config -i ../storage/images/orig -o ../storage/images/compressed
   tips: |
         Tips:
-            - Use 'picli <command> --help' for detailed options for each commands
+            - Use 'picli <command> --help' for detailed options for each command
             - Ensure that input and output folders exist and are accessible
             - Coordinates for cropping are provided as 'left,top,right,bottom'
 crop:
