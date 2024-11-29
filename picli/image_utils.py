@@ -1,3 +1,5 @@
+from picli import resource_manager as mn
+
 def parse_metric(metric_pair):
     """
     Parses a coordinate value which can be an integer or a percentage string.
