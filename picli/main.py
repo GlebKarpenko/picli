@@ -1,4 +1,4 @@
-from picli.cli_setup import setup_cli
+from picli.cli_setup import setup_cli, display_project_info
 from picli import crop_module
 from picli import compress_module
 from picli import config_module
@@ -14,7 +14,7 @@ def main():
         "config": lambda: config_module.main(args)
     }
 
-    unknown_command = commands["help"]
+    unknown_command = lambda: display_project_info()
     commands.get(args.command, unknown_command)()
 
 if __name__ == "__main__":

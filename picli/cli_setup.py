@@ -1,7 +1,21 @@
 import argparse
 
+from picli.version import __version__
 from picli import resource_manager as mn
 from picli.image_utils import parse_metric
+
+def display_project_info():
+    print(mn.get_command_prop(command_name="picli", prop="descr", version=__version__))
+    
+    print("Available commands:")
+    print("     crop:       ", mn.get_command_prop(command_name="crop", prop="help"))
+    print("     compress:   ", mn.get_command_prop(command_name="compress", prop="help"))
+    print("     config:     ", mn.get_command_prop(command_name="config", prop="help"))
+    print("     help:       ", mn.get_command_prop(command_name="help", prop="help"))
+    
+    print()
+    print(mn.get_command_prop(command_name="picli", prop="examples"))
+    print(mn.get_command_prop(command_name="picli", prop="tips"))
 
 def add_crop_command_parser(subparsers):
     crop_parser = subparsers.add_parser(
@@ -91,7 +105,6 @@ def add_help_command_parser(subparsers):
 def setup_subparsers(parser):
     subparsers = parser.add_subparsers(
         dest="command",
-        required=True,
         help=mn.get_command_prop(command_name="picli", prop="help")
     )
 
@@ -99,7 +112,7 @@ def setup_subparsers(parser):
 
 def setup_cli():
     parser = argparse.ArgumentParser(
-        description=mn.get_command_prop(command_name="picli", prop="descr")
+        description=mn.get_command_prop(command_name="picli", prop="descr", version=__version__)
     )
     subparsers = setup_subparsers(parser)
     
