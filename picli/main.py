@@ -1,5 +1,3 @@
-import argparse
-
 from picli.cli_setup import setup_cli
 from picli import crop_module
 from picli import compress_module
