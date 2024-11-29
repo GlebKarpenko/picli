@@ -1,5 +1,6 @@
 import argparse
 
+from picli.image_utils import parse_metric
 from picli import message_manager as mn
 from picli import crop_module
 from picli import compress_module
@@ -14,7 +15,7 @@ def add_crop_command_parser(subparsers):
         "-c",
         "--coords", 
         # Determine type based on user input
-        type=lambda v: [crop_module.parse_coords(coord) for coord in v.split(',')],
+        type=lambda v: [parse_metric(coord) for coord in v.split(',')],
         metavar="left, top, right, bottom",
         required=True, 
         help=mn.get_command_arg_prop(command_name="crop", arg_name="coords", prop="help")

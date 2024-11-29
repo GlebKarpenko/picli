@@ -1,23 +1,9 @@
 import os
 from PIL import Image
+
+from picli.image_utils import scale_metric
 from picli import config_module
 from picli import message_manager as mn
-
-def parse_coords(coordinate):
-    """
-    Parses a coordinate value which can be an integer or a percentage string.
-    Returns the value as a tuple of (type, value), where type is 'px' or '%'.
-    """
-    if coordinate.endswith('%'):
-        try: 
-            return ('%', float(coordinate[:-1]))
-        except ValueError:
-            raise ValueError(mn.get_tools_error("cropping_wrong_percent", coordinate))
-    else:
-        try:
-            return (('px'), int(coordinate))
-        except ValueError:
-            raise ValueError(mn.get_tools_error("cropping_wrong_pixel", coordinate))
 
 def format_coords(input_coords):
     if len(input_coords) == 1:
@@ -26,22 +12,6 @@ def format_coords(input_coords):
         return input_coords
     else:
         raise ValueError(mn.get_tools_error("wrong_crop_coords_input"))
-
-def scale_coord(pair, image_scale):
-    """
-    Converts percentage values to image scale
-    """
-    dtype, value = pair
-
-    if (dtype == '%'
-        and value > 0 
-        and value < 100):
-        scaled_value = int(value / 100 * image_scale)
-        return scaled_value
-    elif isinstance(value, int): 
-        return value
-    else: 
-        return 0
 
 def crop_images(input_folder, output_folder, coords):
     """
@@ -62,10 +32,10 @@ def crop_images(input_folder, output_folder, coords):
             
             width, height = img.size
 
-            left = scale_coord(coords[0], width)
-            top = scale_coord(coords[1], height)
-            right = width - scale_coord(coords[2], width)
-            bottom = height -scale_coord(coords[3], height)
+            left = scale_metric(coords[0], width)
+            top = scale_metric(coords[1], height)
+            right = width - scale_metric(coords[2], width)
+            bottom = height -scale_metric(coords[3], height)
 
             crop_box = (left, top, right, bottom)
             img = img.crop(crop_box)
