@@ -12,15 +12,21 @@ def parse_metric(metric_pair):
             return ('%', float(metric_pair[:-1]))
         except ValueError:
             raise ValueError(mn.get_tools_error("metric_wrong_percent", metric_pair))
-    else:
+    if metric_pair.endswith('px'):
         try:
             return (('px'), int(metric_pair[:-2]))
+        except ValueError:
+            raise ValueError(mn.get_tools_error("metric_wrong_pixel", metric_pair))
+    else:
+        try:
+            return (('px'), int(metric_pair))
         except ValueError:
             raise ValueError(mn.get_tools_error("metric_wrong_pixel", metric_pair))
 
 def scale_metric(metric_pair, image_scale):
     """
     Converts percentage values to image scale
+    Returns pixel values respective to image size
     """
     dtype, value = metric_pair
 
@@ -29,10 +35,12 @@ def scale_metric(metric_pair, image_scale):
         and value < 100):
         scaled_value = int(value / 100 * image_scale)
         return scaled_value
-    elif isinstance(value, int): 
-        return value
-    else: 
-        return 0
+    if isinstance(value, int):
+        if value > image_scale: 
+            return image_scale
+        if value > 0:
+            return value
+    return 0
     
 def get_supported_file_extensions():
     exts = Image.registered_extensions()
