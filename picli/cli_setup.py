@@ -50,7 +50,7 @@ def add_compress_command_parser(subparsers):
     compress_parser.add_argument(
         "-w",
         "--width",
-        type=int,
+        type=lambda v: parse_metric(v),
         default=720,
         help=mn.get_command_arg_prop(command_name="compress", arg_name="width", prop="help")
     )

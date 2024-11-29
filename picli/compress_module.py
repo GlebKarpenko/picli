@@ -2,25 +2,54 @@ import os
 from PIL import Image
 from picli import config_module
 from picli import resource_manager as mn
+from picli.image_utils import scale_metric 
 
-def compress_images(input_folder, output_folder, desired_width, desired_quality):
+def compress_images(input_folder, output_folder, desired_width, desired_quality, fallback_format="JPEG"):
     """Compress images in the input folder and save them to the output folder."""
     os.makedirs(output_folder, exist_ok=True)
 
+    edited_count = 0
+    
+    # TODO: get supported formats from pil or config
+    supported_formats = ['BMP', 'DDS', 'EPS', 'GIF', 'ICNS', 'ICO', 'IM', 'JPG', 'JPEG', 'JPEG2000', 'MSP', 'PCX', 'PNG', 'PPM', 'SGI', 'SPIDER', 'TGA', 'TIFF', 'WEBP', 'XBM']
+
     for filename in os.listdir(input_folder):
-        if filename.lower().endswith((".jpg", ".jpeg", ".png")):
+        file_extension = filename.lower().split('.')[-1]
+        file_extension = file_extension.upper()
+
+        if file_extension in supported_formats:
             img_path = os.path.join(input_folder, filename)
             img = Image.open(img_path)
 
             width, height = img.size
             aspect_ratio = width / height
-            new_height = int(desired_width / aspect_ratio)
-            resized_image = img.resize((desired_width, new_height))
+
+            scaled_width = scale_metric(desired_width, width)
+            scaled_height = int(scaled_width / aspect_ratio)
+            resized_image = img.resize((scaled_width, scaled_height))
 
             output_path = os.path.join(output_folder, filename)
-            resized_image.save(output_path, format="JPEG", quality = desired_quality)
 
-    print(mn.get_tools_message(key="compressing_complete"))
+            try:
+                resized_image.save(output_path, quality = desired_quality)
+            except Exception as e:
+                resized_image.save(output_path, format=fallback_format, quality=desired_quality)
+                print(mn.get_tools_message(
+                    key="compressed_as_fallback",
+                    filename=filename,
+                    original=file_extension,
+                    fallback=fallback_format))
+            edited_count += 1
+
+    if edited_count > 0:
+        print(mn.get_tools_message(
+            key="compressing_complete",
+            input_folder=input_folder,
+            output_folder=output_folder,
+            edited_count=edited_count))
+    else:
+        print(mn.get_tools_error(key="compressing_failed",
+                                 input_folder=input_folder))
 
 def main(args):
     """Entry point for the compress subcommand."""
