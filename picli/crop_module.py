@@ -1,7 +1,7 @@
 import os
 from PIL import Image
 
-from picli.image_utils import scale_metric
+from picli import image_utils
 from picli import config_module
 from picli import resource_manager as mn
 
@@ -24,18 +24,22 @@ def crop_images(input_folder, output_folder, coords):
     os.makedirs(output_folder, exist_ok=True)
 
     edited_count = 0
+
+    supported_extensions = image_utils.get_supported_file_extensions()
     
     for filename in os.listdir(input_folder):
-        if filename.lower().endswith((".jpg", ".jpeg", ".png")):
+        file_extension = image_utils.get_file_extension(filename)
+
+        if file_extension in supported_extensions:
             img_path = os.path.join(input_folder, filename)
             img = Image.open(img_path)
             
             width, height = img.size
 
-            left = scale_metric(coords[0], width)
-            top = scale_metric(coords[1], height)
-            right = width - scale_metric(coords[2], width)
-            bottom = height -scale_metric(coords[3], height)
+            left = image_utils.scale_metric(coords[0], width)
+            top = image_utils.scale_metric(coords[1], height)
+            right = width - image_utils.scale_metric(coords[2], width)
+            bottom = height - image_utils.scale_metric(coords[3], height)
 
             crop_box = (left, top, right, bottom)
             img = img.crop(crop_box)

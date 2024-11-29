@@ -2,7 +2,7 @@ import os
 from PIL import Image
 from picli import config_module
 from picli import resource_manager as mn
-from picli.image_utils import scale_metric 
+from picli import image_utils 
 
 def compress_images(input_folder, output_folder, desired_width, desired_quality, fallback_format="JPEG"):
     """Compress images in the input folder and save them to the output folder."""
@@ -10,21 +10,19 @@ def compress_images(input_folder, output_folder, desired_width, desired_quality,
 
     edited_count = 0
     
-    # TODO: get supported formats from pil or config
-    supported_formats = ['BMP', 'DDS', 'EPS', 'GIF', 'ICNS', 'ICO', 'IM', 'JPG', 'JPEG', 'JPEG2000', 'MSP', 'PCX', 'PNG', 'PPM', 'SGI', 'SPIDER', 'TGA', 'TIFF', 'WEBP', 'XBM']
+    supported_extensions = image_utils.get_supported_file_extensions()
 
     for filename in os.listdir(input_folder):
-        file_extension = filename.lower().split('.')[-1]
-        file_extension = file_extension.upper()
+        file_extension = image_utils.get_file_extension(filename)
 
-        if file_extension in supported_formats:
+        if file_extension in supported_extensions:
             img_path = os.path.join(input_folder, filename)
             img = Image.open(img_path)
 
             width, height = img.size
             aspect_ratio = width / height
 
-            scaled_width = scale_metric(desired_width, width)
+            scaled_width = image_utils.scale_metric(desired_width, width)
             scaled_height = int(scaled_width / aspect_ratio)
             resized_image = img.resize((scaled_width, scaled_height))
 

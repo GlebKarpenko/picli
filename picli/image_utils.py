@@ -1,3 +1,4 @@
+from PIL import Image
 from picli import resource_manager as mn
 
 def parse_metric(metric_pair):
@@ -31,3 +32,10 @@ def scale_metric(metric_pair, image_scale):
         return value
     else: 
         return 0
+    
+def get_supported_file_extensions():
+    exts = Image.registered_extensions()
+    return {ex for ex, f in exts.items() if f in Image.OPEN}
+
+def get_file_extension(filename):
+    return '.' + filename.lower().split('.')[-1]
