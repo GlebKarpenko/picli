@@ -1,8 +1,12 @@
 from setuptools import setup, find_packages
 
+version = {}
+with open("picli/version.py") as fp:
+    exec(fp.read(), version)
+
 setup(
     name="picli",
-    version="1.0.0",
+    version=version["__version__"],
     author="Gleb Karpenko",
     author_email="glebkarpenko1@gmail.com",
     description="A CLI toolset for automated image editing",
