@@ -65,12 +65,13 @@ def add_compress_command_parser(subparsers):
         "-w",
         "--width",
         type=lambda v: parse_metric(v),
-        default=720,
+        default=None,
         help=mn.get_command_arg_prop(command_name="compress", arg_name="width", prop="help")
     )
     compress_parser.add_argument(
         "-q",
         "--quality",
+        required=True,
         type=int,
         default=80,
         help=mn.get_command_arg_prop(command_name="compress", arg_name="quality", prop="help")

@@ -7,6 +7,8 @@ def parse_metric(metric_pair):
     Returns the value as a tuple of (type, value), where type is 'px' or '%'.
     """
 
+    if metric_pair is None:
+        return None
     if metric_pair.endswith('%'):
         try: 
             return ('%', float(metric_pair[:-1]))
@@ -28,6 +30,9 @@ def scale_metric(metric_pair, image_scale):
     Converts percentage values to image scale
     Returns pixel values respective to image size
     """
+    if metric_pair is None:
+        return image_scale
+
     dtype, value = metric_pair
 
     if (dtype == '%'
