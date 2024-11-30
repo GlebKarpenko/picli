@@ -20,6 +20,14 @@ Check GitHub realeases for installation.
 `picli <command> [options]`
 
 ## Usage examples
+<br>Compress images from current directory into ./edited:
+  ```sh
+  picli compress --width 80%, -q 55
+  ```
+<br>Resize images by width while remaining the aspect-ratio:
+  ```sh
+  picli compress -w 860px --output_folder ./resized`
+  ```
 <br>Crop images to a specific location:
   ```sh
   picli crop -coords 5%,0,20px,60 -input_folder ./images --output_folder ./cropped
@@ -27,14 +35,6 @@ Check GitHub realeases for installation.
 <br>Crop images from current directory into ./edited:
   ```sh
   picli crop -c 5%,10%,0,0
-  ```
-<br>Compress with resizing images from current directory into ./edited:
-  ```sh
-  picli compress --width 80%, -q 55
-  ```
-<br>Resize images by width while remaining the aspect-ratio:
-  ```sh
-  picli compress -w 860px --output_folder ./resized`
   ```
 <br>Config directories to edit from and save results to:
   ```sh
