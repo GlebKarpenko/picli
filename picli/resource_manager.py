@@ -1,7 +1,8 @@
 import os
 import yaml
+from picli import __file__ as package_root
 
-RESOURCE_DIR_PATH = "resources"
+RESOURCE_DIR_PATH = os.path.join(os.path.dirname(package_root), "../resources")
 COMMANDS_FILE_PATH = "commands.yaml"
 MESSAGES_FILE_PATH = "messages.yaml"
 DEFAULT_MESSAGE = "<!Message not found!>"
