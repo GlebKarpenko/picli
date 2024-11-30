@@ -14,7 +14,20 @@ This tool can be used when dealing with large image datasets that need to be edi
   - Automation-ready: can be scripted for required workflow
 
 ## Install
-Check GitHub realeases for installation.
+1. Download the latest version of `picli` from [Releases](https://github.com/GlebKarpenko/picli/releases)
+2. Extract the archive, on Linux/Mac:
+```sh
+tar -xzf picli-1.0.0.tar.gz
+```
+3. Navigate into project and install the package
+```sh
+cd picli
+pip install .
+```
+4. Verify the installation
+```sh
+picli
+```
 
 ## Basic usage
 `picli <command> [options]`
