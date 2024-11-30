@@ -42,6 +42,19 @@ def scale_metric(metric_pair, image_scale):
             return value
     return 0
     
+def format_quality(quality):
+    BEST_QUALITY = 95
+    SAME_QUALITY = 90
+    WORST_QUALITY = 0
+
+    if not isinstance(quality, int):
+        return SAME_QUALITY
+    if quality > BEST_QUALITY:
+        return BEST_QUALITY
+    if quality <= WORST_QUALITY:
+        return WORST_QUALITY
+    return quality
+
 def get_supported_file_extensions():
     exts = Image.registered_extensions()
     return {ex for ex, f in exts.items() if f in Image.OPEN}

@@ -45,7 +45,8 @@ def crop_images(input_folder, output_folder, coords):
             img = img.crop(crop_box)
             
             output_path = os.path.join(output_folder, filename)
-            img.save(output_path)
+            result_quality = image_utils.format_quality(None)
+            img.save(output_path, quality=result_quality)
 
             edited_count += 1
 

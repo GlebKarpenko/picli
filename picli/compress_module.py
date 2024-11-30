@@ -4,23 +4,13 @@ from picli import config_module
 from picli import resource_manager as mn
 from picli import image_utils 
 
-def format_quality(quality):
-    BEST_QUALITY = 95
-    WORST_QUALITY = 0
-
-    if not isinstance(quality, int) or quality > BEST_QUALITY:
-        return BEST_QUALITY
-    if quality <= WORST_QUALITY:
-        return WORST_QUALITY
-    return quality
-
 def compress_images(input_folder, output_folder, desired_width, desired_quality, fallback_format="JPEG"):
     """Compress images in the input folder and save them to the output folder."""
     os.makedirs(output_folder, exist_ok=True)
 
     edited_count = 0
 
-    desired_quality = format_quality(desired_quality)    
+    desired_quality = image_utils.format_quality(desired_quality)    
     supported_extensions = image_utils.get_supported_file_extensions()
 
     for filename in os.listdir(input_folder):
