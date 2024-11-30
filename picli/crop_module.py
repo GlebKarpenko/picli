@@ -4,6 +4,7 @@ from PIL import Image
 from picli import image_utils
 from picli import config_module
 from picli import resource_manager as mn
+from sys import stdout
 
 def format_coords(input_coords):
     if len(input_coords) == 1:
@@ -50,7 +51,11 @@ def crop_images(input_folder, output_folder, coords):
 
             edited_count += 1
 
+            stdout.write(f"\rProcessed images: {edited_count}")
+            stdout.flush()
+
     if (edited_count > 0):
+        print()
         print(mn.get_tools_message(
             key="cropping_complete",
             input_folder=input_folder, 

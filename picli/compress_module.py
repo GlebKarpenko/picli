@@ -3,6 +3,7 @@ from PIL import Image
 from picli import config_module
 from picli import resource_manager as mn
 from picli import image_utils 
+from sys import stdout
 
 def compress_images(input_folder, output_folder, desired_width, desired_quality, fallback_format="JPEG"):
     """Compress images in the input folder and save them to the output folder."""
@@ -41,7 +42,11 @@ def compress_images(input_folder, output_folder, desired_width, desired_quality,
                     fallback=fallback_format))
             edited_count += 1
 
+            stdout.write(f"\rProcessed images: {edited_count}")
+            stdout.flush()
+
     if edited_count > 0:
+        print()
         print(mn.get_tools_message(
             key="compressing_complete",
             input_folder=input_folder,
