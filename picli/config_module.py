@@ -58,6 +58,13 @@ def set_default_folder(folder_type, folder_path):
     config["FOLDERS"][folder_type] = folder_path
     save_config(config)
 
+    message = mn.get_tools_message(
+        key="config_filepath_complete", 
+        folder_type=folder_type, 
+        user_path=folder_path
+    )
+    print(message)
+
 def get_folder_path(user_input, folder_type):
     return user_input if user_input else get_default_folder(folder_type)
 
@@ -71,26 +78,10 @@ def main(args):
         return
 
     if args.input_folder:
-        user_input_path = args.input_folder
-        set_default_folder("input_folder", user_input_path)
-
-        message = mn.get_tools_message(
-            key="config_filepath_complete", 
-            folder_type="input_folder", 
-            user_path=user_input_path
-        )
-        print(message)
+        set_default_folder("input_folder", args.input_folder)
 
     if args.output_folder:
-        user_output_path = args.output_folder
-        set_default_folder("output_folder", user_output_path)
-
-        message = mn.get_tools_message(
-            key="config_filepath_complete", 
-            folder_type="output_folder", 
-            user_path=user_output_path
-        )
-        print(message)       
+        set_default_folder("output_folder", args.output_folder) 
 
     input_folder = get_default_folder("input_folder")
     output_folder = get_default_folder("output_folder")
