@@ -20,6 +20,9 @@ setup(
             "picli=picli.main:main",
         ],
     },
+    package_data={
+        "": ["resources/*.yaml"],
+    },
     install_requires=[
         "pyyaml",
         "Pillow",
