@@ -17,11 +17,11 @@ This tool can be used when dealing with large image datasets that need to be edi
 1. Download the latest version of `picli` from [Releases](https://github.com/GlebKarpenko/picli/releases)
 2. Extract the archive, on Linux/Mac:
 ```sh
-tar -xzf picli-1.0.0.tar.gz
+tar -xzf picli-1.0.1.tar.gz
 ```
 3. Navigate into project and install the package
 ```sh
-cd picli
+cd picli-1.0.1
 pip install .
 ```
 4. Verify the installation
